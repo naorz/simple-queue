@@ -1,7 +1,7 @@
 const EventEmitter = require('events');
 const queueEventEmitters = {};
 
-// TODO: Replace the "events" lib with real queue lib that based on events
+// TODO: Replace the "events" lib with fancy queue lib
 
 const getQueueEmitter = (queueName) => {
     if (!queueEventEmitters[queueName]) {
@@ -12,11 +12,11 @@ const getQueueEmitter = (queueName) => {
 
 const registerQueueListener = (queueName, callback) => {
     const emitter = getQueueEmitter(queueName);
-    emitter.once('newMessage', callback);
+    emitter.addListener('newMessage', callback);
 };
 
 
-const unregisterQueueListener = (queueName, callback) => {
+const unregisterQueueListener = (queueName, callback, id) => {
     const emitter = getQueueEmitter(queueName);
     emitter.removeListener('newMessage', callback);
 };

@@ -46,8 +46,14 @@ const getMessage = (req, res) => {
     let terminateListener = true;
     const callbackListener = () => {
         const value = queues.getQueuedValue(queue_name);
-        if (!value) return; // keep waiting
-        console.log('🎸', '='.repeat(5), `NEW MESSAGE, queue_name:`, queue_name, 'value', value);
+        console.log('🎸', '='.repeat(5), `NEW MESSAGE, queue_name:`, queue_name, 'value', value, 'timeout', timeout);
+
+        if (!value) {
+            console.log('🎸', '='.repeat(5), `its not your turn yet, still waiting:`, queue_name, 'value');
+            // keep waiting
+            return;
+        }
+
         res.status(200).json(value);
         terminateListener = false;
         unregisterQueueListener(queue_name, callbackListener);
