@@ -1,0 +1,16 @@
+{
+  "name": "simple-queue",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js localhost 3000"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^4.21.0",
+    "http-errors": "^2.0.0",
+    "nodemon": "^3.1.4"
+  }
+}
